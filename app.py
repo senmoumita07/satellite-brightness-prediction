@@ -1,20 +1,13 @@
-import streamlit as st
-import numpy as np
-import pickle
 import os
+import pickle
+import streamlit as st
 
-st.title("🚀 Satellite Brightness Predictor")
-
-st.write("App is running ✅")
-
-# Check current files
-st.write("Files in directory:", os.listdir())
-
-# Load model
 @st.cache_resource
 def load_model():
     try:
-        return pickle.load(open("model.pkl", "rb"))
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        model_path = os.path.join(base_dir, "model.pkl")
+        return pickle.load(open(model_path, "rb"))
     except Exception as e:
         st.error(f"Error loading model: {e}")
         return None
